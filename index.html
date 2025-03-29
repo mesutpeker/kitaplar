@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okuma Değerlendirme Tablosu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <!-- Ana başlık ve alt başlık grubu -->
+            <div class="title-group">
+                <input type="text" id="mainTitle" class="input-long" placeholder="Ana Başlık" value="KARAMAN MESLEKİ VE TEKNİK ANADOLU LİSESİ TÜRK DİLİ VE EDEBİYATI KİTAP OKUMA ÖLÇEĞİ">
+                <input type="text" id="subTitle" class="input-long" placeholder="Alt Başlık" value="Okuma Becerileri Değerlendirme Kriterleri">
+            </div>
+            <!-- Kitap başlıkları grubu -->
+            <div class="book-titles-group">
+                <input type="text" id="book1Title" class="input-short" placeholder="1. Tablo Başlığı" value="1. Kitap">
+                <input type="text" id="book2Title" class="input-short" placeholder="2. Tablo Başlığı" value="2. Kitap">
+            </div>
+            <!-- Öğrenci bilgileri grubu -->
+            <div class="student-info-group">
+                <input type="number" id="studentNumber" class="input-short" placeholder="Öğrenci No" required>
+                <input type="text" id="studentName" class="input-medium" placeholder="Öğrenci Adı" required>
+                <input type="number" id="book1Points" class="input-short" placeholder="1. Kitap Puanı" min="0" max="100" step="5" required>
+                <input type="number" id="book2Points" class="input-short" placeholder="2. Kitap Puanı" min="0" max="100" step="5" required>
+            </div>
+            <!-- Buton grubu -->
+            <div class="button-group">
+                <button onclick="addStudent()" class="add-btn">Öğrenci Ekle</button>
+                <button onclick="printTables()" class="print-btn">Yazdır</button>
+                <button onclick="clearTables()" class="clear-btn">Tabloyu Temizle</button>
+                <button onclick="editCriteria()" class="edit-criteria-btn">Kriterleri Düzenle</button>
+                <button onclick="openExcelPopup()" class="excel-btn">Excel'den Aktar</button>
+            </div>
+            <!-- Form container içine sınıf ekleme kısmını ekle -->
+            <div class="class-management">
+                <div class="class-add-group">
+                    <input type="text" id="newClassName" class="input-medium" placeholder="Sınıf Adı (ör. 9-A)">
+                    <button onclick="addClass()" class="add-btn">Sınıf Ekle</button>
+                </div>
+                <div class="class-select-group">
+                    <select id="classSelect" class="input-medium" onchange="switchClass(this.value)">
+                        <option value="" disabled selected>Sınıf Seçin</option>
+                        <!-- Sınıf seçenekleri JavaScript ile eklenecek -->
+                    </select>
+                </div>
+                <div id="selectedClassActions" style="display: none; margin-top: 10px;">
+                    <div class="selected-class-info">
+                        <span id="selectedClassName"></span>
+                        <div class="selected-class-buttons">
+                            <button onclick="editClass(currentClass)" class="class-edit-btn">✎</button>
+                            <button onclick="deleteClass(currentClass)" class="class-delete-btn">×</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tables-container">
+            <div class="book-table">
+                <h1 class="main-title"></h1>
+                <h2 class="book-title book1-title">1. Kitap</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="number-header">Öğrenci<br>No</th>
+                                <th rowspan="2" class="name-header">Öğrenci<br>Adı Soyadı</th>
+                                <th colspan="10" class="criteria-header"></th>
+                                <th rowspan="2" class="total-header">Toplam</th>
+                                <th rowspan="2" class="no-print">İşlem</th>
+                            </tr>
+                            <tr class="criteria-row" id="criteriaRow1">
+                                <!-- Kriterler JavaScript ile eklenecek -->
+                            </tr>
+                        </thead>
+                        <tbody id="book1TableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="book-table">
+                <h1 class="main-title"></h1>
+                <h2 class="book-title book2-title">2. Kitap</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="name-header">Öğrenci<br>Adı Soyadı</th>
+                                <th colspan="10" class="criteria-header"></th>
+                                <th rowspan="2" class="total-header">Toplam</th>
+                                <th rowspan="2" class="no-print">İşlem</th>
+                            </tr>
+                            <tr class="criteria-row" id="criteriaRow2">
+                                <!-- Kriterler JavaScript ile eklenecek -->
+                            </tr>
+                        </thead>
+                        <tbody id="book2TableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Düzenleme Popup'ı -->
+    <div class="popup-overlay" id="editPopup">
+        <div class="popup">
+            <div class="popup-header">
+                <h3>Öğrenci Düzenle</h3>
+                <button class="popup-close" onclick="closePopup()">&times;</button>
+            </div>
+            <div class="popup-content">
+                <input type="hidden" id="editStudentIndex">
+                <input type="number" id="editStudentNumber" placeholder="Öğrenci No" required>
+                <input type="text" id="editStudentName" placeholder="Öğrenci Adı" required>
+                <input type="number" id="editBook1Points" placeholder="1. Kitap Puanı" min="0" max="100" step="5" required>
+                <input type="number" id="editBook2Points" placeholder="2. Kitap Puanı" min="0" max="100" step="5" required>
+            </div>
+            <div class="popup-buttons">
+                <button onclick="closePopup()" class="popup-cancel">İptal</button>
+                <button onclick="saveEdit()" class="popup-save">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kriterler Düzenleme Popup'ı -->
+    <div class="popup-overlay" id="criteriaPopup">
+        <div class="popup criteria-popup">
+            <div class="popup-header">
+                <h3>Kriterleri Düzenle</h3>
+                <button class="popup-close" onclick="closeCriteriaPopup()">&times;</button>
+            </div>
+            <div class="popup-content criteria-content">
+                <div id="criteriaInputs">
+                    <!-- Kriter input'ları JavaScript ile eklenecek -->
+                </div>
+            </div>
+            <div class="popup-buttons">
+                <button onclick="closeCriteriaPopup()" class="popup-cancel">İptal</button>
+                <button onclick="saveCriteria()" class="popup-save">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Excel Popup'ı -->
+    <div class="popup-overlay" id="excelPopup">
+        <div class="popup excel-popup">
+            <div class="popup-header">
+                <h3>Excel'den Veri Ekle</h3>
+                <button class="popup-close" onclick="closeExcelPopup()">&times;</button>
+            </div>
+            
+            <div class="excel-instructions">
+                <h4>Excel'den Veri Aktarma:</h4>
+                <ul>
+                    <li>E-Okul öğrenci işlemlerinden Excel formatında sınıf listesi indirin</li>
+                    <li>Excel dosyasını açıp öğrenci no, adı ve soyadı kısımlarını kopyalayın</li>
+                    <li>Kopyaladığınız verileri aşağıdaki alana yapıştırın</li>
+                </ul>
+            </div>
+
+            <textarea 
+                id="excelText" 
+                placeholder="Excel'den kopyaladığınız öğrenci listesini buraya yapıştırın..."
+            ></textarea>
+
+            <div class="popup-buttons">
+                <button onclick="closeExcelPopup()" class="popup-cancel">İptal</button>
+                <button onclick="parseExcelData()" class="popup-save">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sınıf Düzenleme Popup'ı -->
+    <div class="popup-overlay" id="editClassPopup">
+        <div class="popup">
+            <div class="popup-header">
+                <h3>Sınıf Düzenle</h3>
+                <button class="popup-close" onclick="closeEditClassPopup()">&times;</button>
+            </div>
+            <div class="popup-content">
+                <input type="hidden" id="oldClassName">
+                <input type="text" id="editClassName" placeholder="Yeni Sınıf Adı" required>
+            </div>
+            <div class="popup-buttons">
+                <button onclick="closeEditClassPopup()" class="popup-cancel">İptal</button>
+                <button onclick="saveClassEdit()" class="popup-save">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
