@@ -1,0 +1,1077 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 12pt;
+    line-height: 1.2;
+}
+
+.book-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.title-group,
+.book-titles-group,
+.student-info-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.title-group {
+    flex-direction: column;
+}
+
+.book-titles-group {
+    justify-content: flex-start;
+}
+
+.student-info-group {
+    align-items: center;
+}
+
+.input-long {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.input-medium {
+    flex: 2;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.input-short {
+    flex: 1;
+    min-width: 120px;
+    max-width: 150px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    background: #f0f0f0;
+    color: #666;
+    font-weight: 600;
+    flex: 1;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:active {
+    box-shadow: inset 5px 5px 10px #d1d1d1,
+                inset -5px -5px 10px #ffffff;
+}
+
+.add-btn {
+    background: #4cd137;
+    color: white;
+}
+
+.add-btn:hover {
+    background: #44bd32;
+}
+
+.print-btn {
+    background: #2e86de;
+    color: white;
+}
+
+.print-btn:hover {
+    background: #2874c4;
+}
+
+.clear-btn {
+    background: #ff9f43;
+    color: white;
+}
+
+.clear-btn:hover {
+    background: #e68a39;
+}
+
+.edit-criteria-btn {
+    background: #a55eea;
+    color: white;
+}
+
+.edit-criteria-btn:hover {
+    background: #8854c9;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    max-width: 297mm; /* A4 yatay genişlik */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+    height: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+th {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+
+.criteria-header {
+    background: #e9ecef;
+    font-size: 12pt;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.criteria-row th {
+    font-size: 10px;
+    background: #e9ecef;
+    width: 7.7%;
+    height: auto;
+    min-height: 40px;
+    white-space: normal;
+    line-height: 1.1;
+    padding: 2px;
+}
+
+.number-header {
+    width: 5.5%;
+    background: #f8f9fa;
+    font-size: 11px;
+}
+
+.name-header {
+    width: 8%;
+    background: #f8f9fa;
+    font-size: 11px;
+}
+
+.total-header {
+    width: 5%;
+    background: #f8f9fa;
+    font-size: 11px;
+}
+
+.edit-btn {
+    background: #2e86de;
+    color: white;
+    padding: 4px 8px;
+    font-size: 11px;
+    margin-right: 4px;
+    flex: none;
+}
+
+.edit-btn:hover {
+    background: #1976D2;
+}
+
+.delete-btn {
+    background: #ff6b6b;
+    color: white;
+    padding: 4px 8px;
+    font-size: 11px;
+    flex: none;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+/* Popup temel stilleri - Modern ve Sade */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup aktif olduğunda */
+.popup-overlay.active {
+    display: flex;
+}
+
+.popup {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    min-width: 300px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.popup-header h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.popup-close {
+    width: 28px;
+    height: 28px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 6px;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.popup-close:hover {
+    background: #ff4444;
+    color: white;
+}
+
+.popup-content input,
+.popup-content textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f8f9fa;
+    margin-bottom: 15px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.popup-content input:focus,
+.popup-content textarea:focus {
+    outline: none;
+    border-color: #4cd137;
+    background: #fff;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.popup-save,
+.popup-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.popup-save {
+    background: #4cd137;
+    color: white;
+}
+
+.popup-cancel {
+    background: #ff6b6b;
+    color: white;
+}
+
+.popup-save:hover,
+.popup-cancel:hover {
+    opacity: 0.9;
+}
+
+/* Mobil için medya sorguları */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 5px;
+        -webkit-text-size-adjust: 100%; /* iOS font boyutu düzeltmesi */
+    }
+
+    .container {
+        padding: 10px;
+        margin: 0;
+    }
+
+    /* Form container düzenlemeleri */
+    .form-container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .title-group,
+    .book-titles-group,
+    .student-info-group,
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Input alanları */
+    .input-long,
+    .input-medium,
+    .input-short {
+        width: 100%;
+        max-width: none;
+        min-width: unset;
+        padding: 10px;
+        font-size: 16px; /* iOS için minimum font boyutu */
+        margin-bottom: 8px;
+    }
+
+    /* Butonlar */
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        min-height: 44px; /* iOS için minimum dokunma alanı */
+        margin-bottom: 5px;
+    }
+
+    /* Tablo düzenlemeleri */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -10px;
+        padding: 0 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px 4px;
+        white-space: nowrap;
+    }
+
+    .edit-btn, 
+    .delete-btn {
+        padding: 8px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+
+    /* Sınıf yönetimi */
+    .class-management {
+        padding: 12px;
+        margin: 10px 0;
+    }
+
+    .class-add-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .class-tabs {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .class-tab {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .class-name {
+        flex: 1;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .class-edit-btn, 
+    .class-delete-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    /* Popup düzenlemeleri */
+    .popup {
+        width: 92%;
+        margin: 10px;
+        padding: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .popup-header {
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .popup-header h3 {
+        font-size: 16px;
+    }
+
+    .popup-close {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+    }
+
+    .popup-content input,
+    .popup-content textarea {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .popup-buttons {
+        gap: 8px;
+    }
+
+    .popup-save,
+    .popup-cancel {
+        flex: 1;
+        font-size: 14px;
+        padding: 12px;
+        min-height: 44px;
+    }
+
+    /* Excel popup */
+    .excel-popup {
+        width: 92%;
+        max-width: none;
+    }
+
+    .excel-instructions {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .excel-instructions h4 {
+        font-size: 14px;
+    }
+
+    .excel-instructions li {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    /* Kriterleri düzenleme popup'ı */
+    .criteria-popup {
+        width: 92%;
+    }
+
+    .criteria-input-group {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .criteria-input-group label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .criteria-input-group textarea {
+        min-height: 80px;
+    }
+
+    /* Safari için özel düzeltmeler */
+    @supports (-webkit-touch-callout: none) {
+        input, 
+        textarea, 
+        select {
+            font-size: 16px !important; /* Zoom önleme */
+        }
+
+        .popup {
+            max-height: -webkit-fill-available;
+        }
+    }
+}
+
+/* iPhone X ve üzeri için güvenli alan */
+@supports (padding: max(0px)) {
+    @media screen and (max-width: 768px) {
+        body {
+            padding-left: max(5px, env(safe-area-inset-left));
+            padding-right: max(5px, env(safe-area-inset-right));
+            padding-bottom: max(5px, env(safe-area-inset-bottom));
+        }
+
+        .popup {
+            padding-bottom: max(15px, env(safe-area-inset-bottom));
+        }
+    }
+}
+
+/* Yazdırma için medya sorguları */
+@media print {
+    @page {
+        size: landscape;
+        margin: 1cm;
+    }
+    
+    /* Temel yazdırma ayarları */
+    body {
+        padding: 0;
+        background: white;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .form-container, .no-print {
+        display: none !important;
+    }
+
+    /* Her kitap tablosu yeni sayfada başlasın */
+    .book-table {
+        page-break-before: always;
+    }
+
+    /* İlk kitap tablosu sayfa başından başlasın */
+    .book-table:first-of-type {
+        page-break-before: auto;
+    }
+
+    /* Tablo başlıkları için ayarlar */
+    thead {
+        display: table-header-group; /* Tablo başlıklarını her sayfada tekrarla */
+    }
+
+    /* Ana başlık ve kitap başlığı varsayılan olarak gizli */
+    .main-title, .book-title {
+        display: none;
+    }
+
+    /* Her kitabın ilk sayfasında başlıkları göster */
+    .book-table:first-of-type .main-title,
+    .book-table:first-of-type .book-title,
+    .book-table:nth-of-type(2) .main-title,
+    .book-table:nth-of-type(2) .book-title {
+        display: block;
+    }
+
+    /* Tablo container ayarları */
+    .table-responsive {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    /* Tablo ayarları */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1.5px solid #000;
+    }
+
+    /* Tablo hücreleri için ayarlar */
+    th, td {
+        border: 1.5px solid #000;
+        padding: 4px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    /* Tablo başlık hücreleri için ayarlar */
+    th {
+        background-color: #f5f5f5 !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        font-weight: bold;
+    }
+
+    /* Tablo satırları için ayarlar */
+    tr {
+        page-break-inside: avoid; /* Satırların bölünmesini engelle */
+    }
+
+    /* Öğrenci no ve ad sütunları her zaman görünsün */
+    .number-header, .name-header {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background-color: #f5f5f5 !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+
+    /* Tablo başlık satırı her sayfada tekrarlansın */
+    thead {
+        display: table-header-group;
+    }
+
+    /* Tablo gövdesi ayarları */
+    tbody {
+        border: 1.5px solid #000;
+    }
+
+    /* Her sayfanın başında ve sonunda tam kenarlık */
+    thead::before,
+    thead::after,
+    tbody::before,
+    tbody::after {
+        content: "";
+        display: table-row;
+        height: 0;
+    }
+
+    thead > tr > th {
+        border-top: 1.5px solid #000;
+        border-bottom: 1.5px solid #000;
+    }
+
+    /* Kriterlerin başlık hücrelerini düzenle */
+    .criteria-header {
+        border-bottom: 1.5px solid #000;
+    }
+
+    .criteria-row th {
+        border: 1.5px solid #000;
+    }
+
+    /* Toplam sütunu için ayarlar */
+    .total-header {
+        border: 1.5px solid #000;
+        background-color: #f5f5f5 !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}
+
+/* Input stilleri için Neumorphic tasarım */
+.input-long,
+.input-medium,
+.input-short {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    box-shadow: inset 5px 5px 10px #d1d1d1,
+                inset -5px -5px 10px #ffffff;
+    transition: all 0.3s ease;
+}
+
+.input-long:focus,
+.input-medium:focus,
+.input-short:focus {
+    outline: none;
+    box-shadow: inset 3px 3px 6px #d1d1d1,
+                inset -3px -3px 6px #ffffff;
+}
+
+/* Popup input ve textarea stilleri */
+.popup-content input,
+.criteria-input-group textarea {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 15px;
+    box-shadow: inset 5px 5px 10px #d1d1d1,
+                inset -5px -5px 10px #ffffff;
+    transition: all 0.3s ease;
+}
+
+.popup-content input:focus,
+.criteria-input-group textarea:focus {
+    outline: none;
+    box-shadow: inset 3px 3px 6px #d1d1d1,
+                inset -3px -3px 6px #ffffff;
+}
+
+.excel-btn {
+    background: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.excel-btn:hover {
+    background: #219a52;
+}
+
+/* Excel Popup Stilleri */
+.excel-popup {
+    max-width: 600px;
+}
+
+.excel-instructions {
+    background: #f0f7ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #2e86de;
+}
+
+.excel-instructions h4 {
+    color: #2e86de;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.excel-instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.excel-instructions li {
+    margin-bottom: 12px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+    padding-left: 24px;
+    position: relative;
+}
+
+.excel-instructions li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #2e86de;
+}
+
+#excelText {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: monospace;
+    background: #f8f9fa;
+    margin-bottom: 20px;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+#excelText:focus {
+    border-color: #2e86de;
+    outline: none;
+    background: #fff;
+}
+
+/* Sınıf yönetimi stilleri - Neumorphic tasarım */
+.class-management {
+    margin-bottom: 20px;
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px #d1d1d1,
+                -8px -8px 16px #ffffff;
+}
+
+.class-add-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.class-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.class-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f0f0f0;
+    padding: 8px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #d1d1d1,
+                -5px -5px 10px #ffffff;
+}
+
+.class-name {
+    background: linear-gradient(145deg, #4cd137, #44bd32);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+
+.class-name:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 209, 55, 0.3);
+}
+
+.class-name.active {
+    background: linear-gradient(145deg, #44bd32, #3da82c);
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.class-edit-btn, 
+.class-delete-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.class-edit-btn {
+    background: linear-gradient(145deg, #2e86de, #2874c4);
+    color: white;
+}
+
+.class-delete-btn {
+    background: linear-gradient(145deg, #ff6b6b, #ee5253);
+    color: white;
+}
+
+.class-edit-btn:hover,
+.class-delete-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(110%);
+}
+
+@media screen and (max-width: 768px) {
+    .class-add-group {
+        flex-direction: column;
+    }
+    
+    .class-tabs {
+        flex-direction: column;
+    }
+    
+    .class-tab {
+        width: 100%;
+    }
+}
+
+/* Kriterler popup özel stilleri */
+.criteria-popup {
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+}
+
+.criteria-popup .popup-header {
+    background: linear-gradient(145deg, #a55eea, #8854c9);
+    margin: -25px -25px 15px -25px;
+    padding: 20px 25px;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 15px rgba(165, 94, 234, 0.2);
+}
+
+.criteria-popup .popup-header h3 {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.criteria-popup .popup-close {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.criteria-popup .popup-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: none;
+}
+
+.criteria-input-group {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.criteria-input-group:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.criteria-input-group label {
+    color: #6c5ce7;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    font-size: 13px;
+}
+
+.criteria-input-group textarea {
+    min-height: 50px;
+    max-height: 80px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.criteria-input-group textarea:focus {
+    border-color: #a55eea;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(165, 94, 234, 0.1);
+}
+
+.criteria-popup .popup-buttons {
+    background: #f8f9fa;
+    margin: 15px -25px -25px -25px;
+    padding: 15px 25px;
+    border-top: 1px solid #eee;
+    border-radius: 0 0 12px 12px;
+}
+
+.criteria-popup .popup-save {
+    background: linear-gradient(145deg, #a55eea, #8854c9);
+    padding: 10px 25px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(165, 94, 234, 0.2);
+}
+
+.criteria-popup .popup-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(165, 94, 234, 0.3);
+}
+
+.criteria-popup .popup-cancel {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    padding: 10px 25px;
+    font-weight: 600;
+}
+
+.criteria-popup .popup-cancel:hover {
+    background: #fff;
+    border-color: #d0d0d0;
+}
+
+/* Grid layout ekle - yan yana 2 kriter göster */
+.popup-content.criteria-content {
+    display: block;
+    padding: 0 15px;
+}
+
+/* Mobil görünüm için tek kolon */
+@media screen and (max-width: 768px) {
+    .criteria-popup {
+        max-width: 90%;
+        margin: 20px;
+    }
+}
